@@ -138,12 +138,23 @@ class VistaResultados(ttk.Frame):
 
         # ── Casos b) y c): requieren decisión ────────────────────────────────
         decisiones = conciliacion.decisiones
+        coincidencias = conciliacion.coincidencias
+        incidencias = conciliacion.incidencias
         ttk.Label(
             marco,
-            text="b) Coincidencias y c) incidencias: %d %s" % (
-                len(decisiones), "(hay que decidir en todas)" if decisiones else "(ninguna)"),
-            foreground=COLOR_INCIDENCIA if conciliacion.incidencias else COLOR_COINCIDENCIA,
+            text="b) Coincidencias (misma fecha e importe): %d      "
+                 "c) Incidencias (misma fecha, importe distinto): %d      "
+                 "→ por decidir: %d" % (len(coincidencias), len(incidencias),
+                                        len(decisiones)),
+            foreground=COLOR_INCIDENCIA if incidencias else COLOR_COINCIDENCIA,
             font=("Segoe UI", 9, "bold")).pack(anchor="w", pady=(10, 2))
+        if decisiones:
+            ttk.Label(
+                marco,
+                text="Cada fila muestra a la izquierda lo que dice el extracto y a la "
+                     "derecha lo que ya hay en Ninox; hay que marcar «Insertar» o "
+                     "«Desestimar» en todas.",
+                foreground="#444444").pack(anchor="w")
 
         if decisiones:
             botones = ttk.Frame(marco)
