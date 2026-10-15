@@ -1,0 +1,13 @@
+# Normalización de finales de línea
+* text=auto
+*.py   text eol=lf
+*.md   text eol=lf
+*.txt  text eol=lf
+*.cfg  text eol=lf
+*.yml  text eol=lf
+*.bat  text eol=crlf
+
+# Binarios
+*.ico  binary
+*.png  binary
+*.pdf  binary

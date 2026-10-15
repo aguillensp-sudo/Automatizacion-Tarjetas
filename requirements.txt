@@ -1,0 +1,7 @@
+# Dependencias de la aplicación de Tarjetas Banco.
+#
+# Todas son de lectura de PDF, interfaz y empaquetado. La comunicación con Ninox
+# usa urllib de la biblioteca estándar: no hay dependencia de red.
+PyMuPDF>=1.24        # lectura del texto y de las coordenadas del PDF
+Pillow>=10           # generación del icono de la aplicación
+pytest>=8            # pruebas

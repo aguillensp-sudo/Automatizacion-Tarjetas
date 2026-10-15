@@ -1,0 +1,34 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# La carpeta PDFS NUNCA debe publicarse: contiene extractos bancarios reales.
+# ──────────────────────────────────────────────────────────────────────────────
+PDFS/
+*.pdf
+
+# Salidas y trazas
+logs/
+*.log
+salidas/
+dist/
+build/
+*.spec
+.tmp_pruebas/
+
+# Credenciales
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.tmp_pytest/
+piptmp/
+.piptmp/
+
+# Entorno
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
