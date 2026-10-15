@@ -64,6 +64,22 @@ def test_la_ventana_muestra_los_ficheros_de_la_carpeta(ventana):
     assert str(ventana._var_carpeta.get()) == str(config.PDFS_DIR)
 
 
+def test_sin_ficheros_avisa_con_un_mensaje_de_error(ventana, tmp_path, monkeypatch):
+    """§3.3: si no hay ficheros, se muestra un mensaje de error."""
+    vacia = tmp_path / "carpeta_vacia"
+    vacia.mkdir()
+    monkeypatch.setattr(config, "PDFS_DIR", vacia)
+    errores: list[tuple] = []
+    monkeypatch.setattr("ui.app.messagebox.showerror",
+                        lambda *a, **k: errores.append(a))
+    monkeypatch.setattr("ui.app.messagebox.askyesno",
+                        lambda *a, **k: pytest.fail("no debe preguntar sin ficheros"))
+    ventana._arrancar()
+    assert errores, "debe avisar de que no hay ficheros"
+    assert "No hay ningún fichero PDF" in str(errores[0])
+    assert ventana._lista.get_children() == ()
+
+
 def test_las_decisiones_empiezan_sin_marcar_y_bloquean_la_ejecucion(ventana, tmp_path):
     conciliacion = _conciliacion(tmp_path)
     ventana._resultado = type("R", (), {"conciliaciones": [conciliacion]})()
